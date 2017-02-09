@@ -2,6 +2,7 @@ body {
   background-color: #ddd;
 }
 
+.description,
 .main {
   min-width: 600px;
   max-width: 900px;
@@ -11,6 +12,10 @@ body {
   background-color: #fff;
   border: 1px solid #999;
   border-radius: 3px;
+}
+
+.description {
+  display: none;
 }
 
 .table {
