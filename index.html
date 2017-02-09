@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Экзамен по курсу</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body> 
+  <div class="main">
+    <div class="table table1">  
+      <h2>Таблица 1 – общая статистика </h2>
+      <table>
+        <tbody>
+          <tr>
+            <td>Общая сумма заказов</td>
+            <td id="total-sum"></td>
+          </tr>
+          <tr>
+            <td>Общее число заказов</td>
+            <td id="total-orders" class="number"></td>
+          </tr>
+          <tr>
+            <td>Общая сумма рекомендованных продаж</td>
+            <td id="total-recommended"></td>
+          </tr>
+          <tr>
+            <td>Общая сумма обычных продаж</td>
+            <td id="total-typical"></td>
+          </tr>
+          <tr>
+            <td>Общее число покупателей</td>
+            <td id="total-customers" class="number"></td>
+          </tr>
+          <tr>
+            <td>Количество заказов, в которых нет рекомендованных продаж</td>
+            <td id="total-without-recommended" class="number"></td>
+          </tr>
+          <tr>
+            <td>Количество заказов, в которых только рекомендованные продажи</td>
+            <td id="total-without-typical" class="number"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table table2">
+      <h2>Таблица 2 – статистика с 
+        <span id="stat-day-start">26</span><span id="stat-month-start"></span><span id="stat-year-start"></span>
+                                по
+        <span id="stat-day-end">  28</span> <span id="stat-month-end"> июня</span> <span id="stat-year-end">2015 года</span><span class="myicon" id="table-menu-2">&#10033</span></h2>
+      <table>
+        <tbody>
+          <tr>
+            <td>Сумма продаж за период</td>
+            <td id="period-sum"></td>
+          </tr>
+          <tr>
+            <td>Количество продаж за период</td>
+            <td id="period-orders"  class="number"></td>
+          </tr>
+          <tr>
+            <td>Покупателей за период</td>
+            <td id="period-customers" class="number"></td>
+          </tr>
+          <tr>
+            <td>Сумма рекомендованных продаж за период</td>
+            <td id="period-recommended"></td>
+          </tr>
+          <tr>
+            <td>Сумма обычных продаж за период</td>
+            <td id="period-typical"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="modal modal-date" id="modal-menu-2">
+        <p>За какой период выводить статистику?</p><br>
+        <div class="dialog-date">
+          <input type="date" id="date-start">
+          <input type="date" id="date-end">
+        </div>
+        <div class="dialog">
+          <button>Вывести</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="table table3">
+      <h2>Таблица 3 – самые дорогие заказы<span class="myicon" id="table-menu-3">&#10033</span></h2>
+      <table id="most-expensive">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>№ заказа</th>
+            <th>ID покупателя</th>
+            <th>Общая сумма</th>
+            <th>Обычные продажи</th>
+            <th>Рекомендованные продажи</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <div class="modal" id="modal-menu-3">
+        <p>Сколько выводить самых дорогих заказов?</p><br>
+        <div class="dialog">
+          <input type="text">
+          <button>Вывести</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="table table4">
+      <h2>Таблица 4 – постоянные покупатели<div class="myicon" id="table-menu-4">&#10033</div></h2>
+      <table id="clientele">
+        <thead>
+          <tr>
+            <th>Покупатель</th>
+            <th>Заказов</th>
+            <th>Общая сумма</th>
+            <th>Обычные продажи</th>
+            <th>Рекомендованные продажи</th>
+          </tr>
+        </thead>
+        <tbody>    
+        </tbody>
+      </table>
+      <div class="modal" id="modal-menu-4">
+        <p>Покупателей с каким числом покупок считать постоянными?</p><br>
+        <div class="dialog">
+          <input type="text">
+          <button>Вывести</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="table table5">
+      <h2>Блок 5 –  поиск заказов по покупателю</h2>
+      <p>
+        <input type="text" placeholder="ID покупателя" id="input-value">
+        <button id="show-orders">Показать заказы</button>
+      </p>
+      <table id="search">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>№ заказа</th>
+            <th>Общая сумма</th>
+            <th>Обычные продажи</th>
+            <th>Рекомендованные продажи</th>
+          </tr>
+        </thead>
+        <tbody>   
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <div class="modal-background" id="modal-background"></div>
+</body>
+</html>
