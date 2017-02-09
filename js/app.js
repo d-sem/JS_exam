@@ -105,20 +105,20 @@ window.addEventListener('load', (function () {
     output("#period-recommended", formatNumber(periodRecommended) + cur );
     output("#period-typical",     formatNumber(periodTypical)     + cur );
     
-    document.getElementById('stat-day-start').innerHTML       = dayStart;
+    document.getElementById('stat-day-start').innerHTML     = dayStart;
     if ( monthEnd != monthStart) {
-      document.getElementById('stat-month-start').innerHTML   = monthNames[monthStart];
+      document.getElementById('stat-month-start').innerHTML = monthNames[monthStart];
     } else {
-      document.getElementById('stat-month-start').innerHTML   = "";
+      document.getElementById('stat-month-start').innerHTML = "";
     }
     if ( yearEnd != yearStart) {
-      document.getElementById('stat-year-start').innerHTML    = " " + yearStart + " года";
+      document.getElementById('stat-year-start').innerHTML  = " " + yearStart + " года";
     } else {
-      document.getElementById('stat-year-start').innerHTML    = "";
+      document.getElementById('stat-year-start').innerHTML  = "";
     }
-    document.getElementById('stat-day-end').innerHTML         = dayEnd;
-    document.getElementById('stat-month-end').innerHTML       = monthNames[monthEnd];
-    document.getElementById('stat-year-end').innerHTML        = yearEnd + " года";
+    document.getElementById('stat-day-end').innerHTML       = dayEnd;
+    document.getElementById('stat-month-end').innerHTML     = monthNames[monthEnd];
+    document.getElementById('stat-year-end').innerHTML      = yearEnd + " года";
   };
   
   // Таблица 3
@@ -165,6 +165,7 @@ window.addEventListener('load', (function () {
     if (clienteleOrders == undefined) {
       var clienteleOrders = 11;
     }
+    
     var clienteleArr = [];
     var q            = 1;
     var total        = 0;
@@ -178,8 +179,9 @@ window.addEventListener('load', (function () {
     for (var i = 0, count = ordersList.length; i < count; ++i) {
       if (i > 0 && ordersList[i].user_id == ordersList[i - 1].user_id) {
         q++;
-        total = total + ordersList[i].total;
-        typical += ordersList[i].typical;
+        
+        total        = total + ordersList[i].total;
+        typical     += ordersList[i].typical;
         recommended += ordersList[i].recommended;
       
       } else if(i > 0) {
@@ -194,8 +196,10 @@ window.addEventListener('load', (function () {
                      total:       clienteleTotal,
                      typical:     clienteleTypical,
                      recommended: clienteleRecommended};
+
           clienteleArr.push(obj);
         }
+        
         q = 1;
         total = 0;
         typical = 0;
@@ -225,6 +229,7 @@ window.addEventListener('load', (function () {
 	
         HTML += tHTML;
       }
+      
     tbody.innerHTML = HTML;
   };
   
@@ -246,7 +251,7 @@ window.addEventListener('load', (function () {
       var userId = document.querySelector('#input-value').value
 
       if(isNaN(userId) && userId != "") {
-      alert("Ошибка! Введите число!");
+        alert("Ошибка! Введите число!");
       }
   
       for(var i = 0, count = ordersList.length; i < count; i++) {
@@ -263,6 +268,7 @@ window.addEventListener('load', (function () {
 	      HTML += tHTML;
         }
 	  }
+      
 	  tbody.innerHTML = HTML;
     };
   
@@ -282,20 +288,22 @@ window.addEventListener('load', (function () {
     document.querySelector('#modal-menu-2 button').addEventListener('click', changeDate, false);
   
     function changeDate() {
-      console.log(document.querySelector('#date-start').value)
-      console.log(document.querySelector('#date-end').value)
+      console.log(document.querySelector('#date-start').value); // 
+      console.log(document.querySelector('#date-end').value);   //
       
       var start = document.querySelector('#date-start').value.split('-');
       var end   = document.querySelector('#date-end').value.split('-');
+      
       periodStat(start[2], ( Number( start[1] ) - 1 ), start[0], end[2], ( Number( end[1] ) - 1 ), end[0]);
-      console.log(start, end);
+      
+      console.log(start, end); //
+      
       document.getElementById('modal-menu-2').classList.toggle('visible');
       document.getElementById('modal-background').classList.toggle('visible');
     }
   
-  // Третья таблица
+    // Третья таблица
   
- 
     document.getElementById('table-menu-3').addEventListener('click', modal3, false);
   
     function modal3() {
@@ -306,8 +314,10 @@ window.addEventListener('load', (function () {
     document.querySelector('#modal-menu-3 button').addEventListener('click', changeExpensive, false);
   
     function changeExpensive() {
-      var quantity = document.querySelector('#modal-menu-3 input').value
+      var quantity = document.querySelector('#modal-menu-3 input').value;
+      
       mostExpensiveOrders(quantity);
+      
       document.getElementById('modal-menu-3').classList.toggle('visible');
       document.getElementById('modal-background').classList.toggle('visible');
     }
@@ -323,8 +333,10 @@ window.addEventListener('load', (function () {
     }
   
     function changeClientele() {
-      var quantity = document.querySelector('#modal-menu-4 input').value
+      var quantity = document.querySelector('#modal-menu-4 input').value;
+      
       clientele(quantity);
+      
       document.getElementById('modal-menu-4').classList.toggle('visible');
       document.getElementById('modal-background').classList.toggle('visible');
     }
@@ -333,11 +345,11 @@ window.addEventListener('load', (function () {
   
      document.getElementById('modal-background').addEventListener('click', closeModal, false);
      
-     function closeModal() {
-       document.getElementById('modal-background').classList.toggle('visible');
-       document.getElementById('modal-menu-2').classList.remove('visible');
-       document.getElementById('modal-menu-3').classList.remove('visible');
-       document.getElementById('modal-menu-4').classList.remove('visible');
+    function closeModal() {
+      document.getElementById('modal-background').classList.toggle('visible');
+      document.getElementById('modal-menu-2').classList.remove('visible');
+      document.getElementById('modal-menu-3').classList.remove('visible');
+      document.getElementById('modal-menu-4').classList.remove('visible');
      }
   })();
   
@@ -345,161 +357,183 @@ window.addEventListener('load', (function () {
   
   // Третья таблица
   
-    var sortQ3 = 1
-    document.getElementById('most-expensive').addEventListener ('click', (function (e) {
-     
-	 var grid = document.getElementById('most-expensive');
-	 if (e.target.nodeName == 'TH') {
-			 var q = e.target.cellIndex;
-			 sort(q, sortQ3);
+  var sortQ3 = 1;
+  
+  document.getElementById('most-expensive').addEventListener ('click', (function (e) {
+    var grid = document.getElementById('most-expensive');
+    
+    if (e.target.nodeName == 'TH') {
+      var q = e.target.cellIndex;
+      
+      sort(q, sortQ3);
 	}
 	
-	function sort(e){
-        if (sortQ3 === 1) {
-		  for (var i = 1; i< (grid.rows.length); i++){
-			for (var j = grid.rows.length - 1; j > i; j-- ){
-				el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-				el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-				if (el1 < el2) {
-					var prev = grid.rows[j-1].innerHTML ;
-					grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
-					grid.rows[j].innerHTML = prev;		
-				}
+    function sort(e){
+      if (sortQ3 === 1) {
+		for (var i = 1; i< (grid.rows.length); i++){
+		  for (var j = grid.rows.length - 1; j > i; j-- ){
+			el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+			el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+			
+            if (el1 < el2) {
+			  var prev = grid.rows[j-1].innerHTML;
+              
+			  grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
+			  grid.rows[j].innerHTML = prev;		
 		    }
 		  }
-          sortQ3 = 2;
-        } else if (sortQ3 === 2) {
-		  for (var i = 1; i< (grid.rows.length); i++){
-			for (var j = grid.rows.length - 1; j > i; j-- ){
-				el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-				el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-				if (el1 > el2) {
-					var prev = grid.rows[j-1].innerHTML ;
-					grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
-					grid.rows[j].innerHTML = prev;		
-				}
-		    }
+		}
+          
+        sortQ3 = 2;
+        
+      } else if (sortQ3 === 2) {
+		for (var i = 1; i< (grid.rows.length); i++){
+	      for (var j = grid.rows.length - 1; j > i; j-- ){
+		    el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+			el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+			
+            if (el1 > el2) {
+			  var prev = grid.rows[j-1].innerHTML;
+              
+			  grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
+			  grid.rows[j].innerHTML = prev;		
+			}
 		  }
-          sortQ3 = 1;
-        }
+		}
+        sortQ3 = 1;
+      }
     } 
   }), false);
     
   // Четвертая таблица
       
-  var sortQ4 = 1
-    document.getElementById('clientele').addEventListener ('click', (function (e) {
-     
-	 var grid = document.getElementById('clientele');
-	 if (e.target.nodeName == 'TH') {
-			 var q = e.target.cellIndex;
-			 sort(q, sortQ4);
+  var sortQ4 = 1;
+  
+  document.getElementById('clientele').addEventListener ('click', (function (e) {
+    var grid = document.getElementById('clientele');
+	
+    if (e.target.nodeName == 'TH') {
+      var q = e.target.cellIndex;
+      
+      sort(q, sortQ4);
 	}
 	
 	function sort(e){
-        if (sortQ4 === 1) {
-		  for (var i = 1; i< (grid.rows.length); i++){
-			for (var j = grid.rows.length - 1; j > i; j-- ){
-				el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-				el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-				if (el1 < el2) {
-					var prev = grid.rows[j-1].innerHTML ;
-					grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
+      if (sortQ4 === 1) {
+		for (var i = 1; i< (grid.rows.length); i++){
+	      for (var j = grid.rows.length - 1; j > i; j-- ){
+			el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+			el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+			
+            if (el1 < el2) {
+			  var prev = grid.rows[j-1].innerHTML ;
+			  
+              grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
 					grid.rows[j].innerHTML = prev;		
-				}
+			}
+		  }
+		}
+          
+        sortQ4 = 2;
+      } else if (sortQ4 === 2) {
+		for (var i = 1; i< (grid.rows.length); i++){
+	      for (var j = grid.rows.length - 1; j > i; j-- ){
+			el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+			el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+				
+            if (el1 > el2) {
+			  var prev = grid.rows[j-1].innerHTML ;
+				  
+              grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
+			  grid.rows[j].innerHTML = prev;		
 		    }
 		  }
-          sortQ4 = 2;
-        } else if (sortQ4 === 2) {
-		  for (var i = 1; i< (grid.rows.length); i++){
-			for (var j = grid.rows.length - 1; j > i; j-- ){
-				el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-				el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-				if (el1 > el2) {
-					var prev = grid.rows[j-1].innerHTML ;
-					grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
-					grid.rows[j].innerHTML = prev;		
-				}
-		    }
-		  }
-          sortQ4 = 1;
-        }
+		}
+          
+        sortQ4 = 1;
+      }
     } 
   }), false);
   
   // Пятая таблица
   
-  var sortQ5 = 1
-    document.getElementById('search').addEventListener ('click', (function (e) {
+  var sortQ5 = 1;
+  
+  document.getElementById('search').addEventListener ('click', (function (e) {
      
-	 var grid = document.getElementById('search');
-	 if (e.target.nodeName == 'TH') {
-			 var q = e.target.cellIndex;
-			 sort(q, sortQ3);
-	}
+  var grid = document.getElementById('search');
+  
+  if (e.target.nodeName == 'TH') {
+    var q = e.target.cellIndex;
+    
+    sort(q, sortQ3);
+  }
 	
-	function sort(e){
-        if (sortQ5 === 1) {
-		  for (var i = 1; i< (grid.rows.length); i++){
-			for (var j = grid.rows.length - 1; j > i; j-- ){
-				el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-				el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-				if (el1 < el2) {
-					var prev = grid.rows[j-1].innerHTML ;
-					grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
-					grid.rows[j].innerHTML = prev;		
-				}
-		    }
+  function sort(e){
+    if (sortQ5 === 1) {
+      for (var i = 1; i< (grid.rows.length); i++){
+		for (var j = grid.rows.length - 1; j > i; j-- ){
+		  el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+		  el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+		
+          if (el1 < el2) {
+		    var prev = grid.rows[j-1].innerHTML;
+            
+			grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
+			grid.rows[j].innerHTML = prev;		
 		  }
-          sortQ5 = 2;
-        } else if (sortQ5 === 2) {
-		  for (var i = 1; i< (grid.rows.length); i++){
-			for (var j = grid.rows.length - 1; j > i; j-- ){
-				el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-				el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-				if (el1 > el2) {
-					var prev = grid.rows[j-1].innerHTML ;
-					grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
-					grid.rows[j].innerHTML = prev;		
-				}
-		    }
+		}
+	  }
+          
+      sortQ5 = 2;
+    } else if (sortQ5 === 2) {
+	  for (var i = 1; i< (grid.rows.length); i++){
+		for (var j = grid.rows.length - 1; j > i; j-- ){
+		  el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+		  el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+		  
+          if (el1 > el2) {
+			var prev = grid.rows[j-1].innerHTML ;
+			
+            grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
+			grid.rows[j].innerHTML = prev;		
 		  }
-          sortQ5 = 1;
-        }
-    } 
-  }), false);
+		}
+	  }
+          
+      sortQ5 = 1;
+    }
+  } 
+}), false);
   
-  // Вспомогательные функции
+// Вспомогательные функции
 
-  function formatDate(timestamp) {
-    var date = new Date(timestamp * 1000);
-    var dd = date.getDate();
-    if (dd < 10) dd = '0' + dd;
+function formatDate(timestamp) {
+  var date = new Date(timestamp * 1000);
+  var dd = date.getDate();
+    
+  if (dd < 10) dd = '0' + dd;
 
-    var mm = date.getMonth();
-    if (mm < 10) mm = '0' + mm;
+  var mm = date.getMonth();
+  if (mm < 10) mm = '0' + mm;
 
-    var yy = date.getFullYear();
+  var yy = date.getFullYear();
 
-    return dd + '.' + mm + '.' + yy;
-  }
+  return dd + '.' + mm + '.' + yy;
+}
 
-  function output(css, text) {
-    return (document.querySelector(css).innerHTML = text);
-  }
+function output(css, text) {
+  return (document.querySelector(css).innerHTML = text);
+}
 
-  function formatNumber(num) {
-    return num.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
- }
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+}
   
-  function toNumber(thisString) {
-    return Number(thisString.replace(/\s+/g, '').replace('руб.', ''));
-  }
+function toNumber(thisString) {
+  return Number(thisString.replace(/\s+/g, '').replace('руб.', ''));
+}
   
   var end = new Date();
   console.log('Скорость ' + (end.getTime() - start.getTime()) + ' мс');
 }), false);
-
-
-  
-  
