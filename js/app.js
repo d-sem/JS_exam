@@ -387,8 +387,10 @@ window.addEventListener('load', (function () {
       if (sortQ3 === 1) {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
-            el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-            el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+            el1 = ((e == 3) || (e == 4) || (e == 5)) ? 
+              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 3) || (e == 4) || (e == 5)) ? 
+              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
       
             if (el1 < el2) {
               var prev = grid.rows[j-1].innerHTML;
@@ -404,8 +406,10 @@ window.addEventListener('load', (function () {
       } else if (sortQ3 === 2) {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
-            el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-            el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+            el1 = ((e == 3) || (e == 4) || (e == 5)) ? 
+              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 3) || (e == 4) || (e == 5)) ? 
+              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
       
             if (el1 > el2) {
               var prev = grid.rows[j-1].innerHTML;
@@ -438,8 +442,10 @@ window.addEventListener('load', (function () {
       if (sortQ4 === 1) {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
-            el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-            el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+            el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? 
+              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? 
+              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
       
             if (el1 < el2) {
               var prev = grid.rows[j-1].innerHTML ;
@@ -455,8 +461,10 @@ window.addEventListener('load', (function () {
       } else if (sortQ4 === 2) {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
-            el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-            el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+            el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? 
+              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? 
+              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
         
             if (el1 > el2) {
               var prev = grid.rows[j-1].innerHTML;
@@ -489,8 +497,10 @@ window.addEventListener('load', (function () {
       if (sortQ5 === 1) {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
-            el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-            el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+            el1 = ((e == 3) || (e == 4) || (e == 5)) ? 
+              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 3) || (e == 4) || (e == 5)) ? 
+              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
     
             if (el1 < el2) {
               var prev = grid.rows[j-1].innerHTML;
@@ -506,8 +516,10 @@ window.addEventListener('load', (function () {
       } else if (sortQ5 === 2) {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
-            el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-            el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+            el1 = ((e == 3) || (e == 4) || (e == 5)) ? 
+              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 3) || (e == 4) || (e == 5)) ? 
+              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
       
             if (el1 > el2) {
               var prev = grid.rows[j-1].innerHTML;
