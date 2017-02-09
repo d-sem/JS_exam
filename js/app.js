@@ -44,18 +44,19 @@ window.addEventListener('load', (function () {
       customers++;
     }
   
-    output("#total-sum",                 formatNumber(totalSum)           + cur);
-    output("#total-orders",              formatNumber(ordersList.length)       );
-    output("#total-recommended",         formatNumber(totalRecommended)   + cur);
-    output("#total-typical",             formatNumber(totalTypical)       + cur);
-    output("#total-customers",           formatNumber(customers)               );
-    output("#total-without-recommended", formatNumber(withoutRecommended)      );
-    output("#total-without-typical",     formatNumber(withoutTypical)          );
+    output("#total-sum",                 formatNum(totalSum)           + cur);
+    output("#total-orders",              formatNum(ordersList.length)       );
+    output("#total-recommended",         formatNum(totalRecommended)   + cur);
+    output("#total-typical",             formatNum(totalTypical)       + cur);
+    output("#total-customers",           formatNum(customers)               );
+    output("#total-without-recommended", formatNum(withoutRecommended)      );
+    output("#total-without-typical",     formatNum(withoutTypical)          );
   };
   
   // Таблица 2
   
-  function periodStat(dayStart, monthStart, yearStart, dayEnd, monthEnd, yearEnd) {
+  function periodStat(dayStart, monthStart, yearStart, 
+                      dayEnd, monthEnd, yearEnd) {
     if (!dayStart)   { var dayStart   = 26 }
     if (!monthStart) { var monthStart = 5}
     if (!yearStart)  { var yearStart  = 2015}
@@ -83,15 +84,18 @@ window.addEventListener('load', (function () {
                              " ноября", 
                              " декабря"];
     
-    var dateStart = new Date(yearStart, monthStart, dayStart,  0,  0,  0,   0).valueOf() / 1000;
-    var dateEnd   = new Date(yearEnd  , monthEnd,   dayEnd,   23, 59, 59, 999).valueOf() / 1000;
+    var dateStart = 
+      new Date(yearStart, monthStart, dayStart, 0,  0,  0,   0).valueOf() / 1000;
+    var dateEnd   = 
+      new Date(yearEnd  , monthEnd,   dayEnd,  23, 59, 59, 999).valueOf() / 1000;
   
     ordersList.sort(function (a, b) {
       return a.user_id - b.user_id;
     })
   
     for (var i = 0, count = ordersList.length; i < count; ++i) {
-      if (ordersList[i].timestamp >= dateStart && ordersList[i].timestamp <= dateEnd) {
+      if (ordersList[i].timestamp >= dateStart 
+          && ordersList[i].timestamp <= dateEnd) {
         periodSum         += ordersList[i].total;
         periodRecommended += ordersList[i].recommended;
         periodTypical     += ordersList[i].typical;
@@ -111,11 +115,11 @@ window.addEventListener('load', (function () {
       periodCustomers++;
     }
   
-    output("#period-sum",         formatNumber(periodSum)         + cur );
-    output("#period-orders",      formatNumber(periodOrders)            );
-    output("#period-customers",   formatNumber(periodCustomers)         );
-    output("#period-recommended", formatNumber(periodRecommended) + cur );
-    output("#period-typical",     formatNumber(periodTypical)     + cur );
+    output("#period-sum",         formatNum(periodSum)         + cur );
+    output("#period-orders",      formatNum(periodOrders)            );
+    output("#period-customers",   formatNum(periodCustomers)         );
+    output("#period-recommended", formatNum(periodRecommended) + cur );
+    output("#period-typical",     formatNum(periodTypical)     + cur );
     
     document.getElementById('stat-day-start').innerHTML     = dayStart;
     
@@ -162,12 +166,12 @@ window.addEventListener('load', (function () {
       var order = ordersList[i];
       var tHTML = template;
       
-      tHTML = tHTML.replace('#date#',        formatDate( order.timestamp )               );
-      tHTML = tHTML.replace('#id#',          order.id                                    );
-      tHTML = tHTML.replace('#user_id#',     order.user_id                               );
-      tHTML = tHTML.replace('#total#',       formatNumber(order.total)              + cur);
-      tHTML = tHTML.replace('#typical#',     formatNumber(order.typical)            + cur);
-      tHTML = tHTML.replace('#recommended#', formatNumber(order.recommended)        + cur);
+      tHTML = tHTML.replace('#date#',        formatDate( order.timestamp )     );
+      tHTML = tHTML.replace('#id#',          order.id                          );
+      tHTML = tHTML.replace('#user_id#',     order.user_id                     );
+      tHTML = tHTML.replace('#total#',       formatNum(order.total)       + cur);
+      tHTML = tHTML.replace('#typical#',     formatNum(order.typical)     + cur);
+      tHTML = tHTML.replace('#recommended#', formatNum(order.recommended) + cur);
   
       HTML += tHTML;
     }
@@ -239,9 +243,9 @@ window.addEventListener('load', (function () {
     
       tHTML = tHTML.replace('#user_id#', client.user_id);
       tHTML = tHTML.replace('#orders#', client.orders);
-      tHTML = tHTML.replace('#total#', formatNumber(client.total) + cur);
-      tHTML = tHTML.replace('#typical#', formatNumber(client.typical) + cur);
-      tHTML = tHTML.replace('#recommended#', formatNumber(client.recommended) + cur);
+      tHTML = tHTML.replace('#total#', formatNum(client.total) + cur);
+      tHTML = tHTML.replace('#typical#', formatNum(client.typical) + cur);
+      tHTML = tHTML.replace('#recommended#', formatNum(client.recommended) + cur);
   
       HTML += tHTML;
     }
@@ -264,7 +268,7 @@ window.addEventListener('load', (function () {
                       <td>#recommended#</td>\
                     </tr>';
   
-    var userId = document.querySelector('#input-value').value
+    var userId = document.querySelector('#input-value').value;
 
     if(isNaN(userId) && userId != "") {
       alert("Ошибка! Введите число!");
@@ -275,11 +279,11 @@ window.addEventListener('load', (function () {
         var order = ordersList[i];
         var tHTML = template;
         
-        tHTML = tHTML.replace('#date#',        formatDate(order.timestamp)           );
-        tHTML = tHTML.replace('#id#',          order.id                              );
-        tHTML = tHTML.replace('#total#',       formatNumber(order.total)        + cur);
-        tHTML = tHTML.replace('#typical#',     formatNumber(order.typical)      + cur);
-        tHTML = tHTML.replace('#recommended#', formatNumber(order.recommended)  + cur);
+        tHTML = tHTML.replace('#date#',        formatDate(order.timestamp)       );
+        tHTML = tHTML.replace('#id#',          order.id                          );
+        tHTML = tHTML.replace('#total#',       formatNum(order.total)       + cur);
+        tHTML = tHTML.replace('#typical#',     formatNum(order.typical)     + cur);
+        tHTML = tHTML.replace('#recommended#', formatNum(order.recommended) + cur);
   
         HTML += tHTML;
       }
@@ -303,15 +307,14 @@ window.addEventListener('load', (function () {
     document.querySelector('#modal-menu-2 button').addEventListener('click', changeDate, false);
   
     function changeDate() {
-      console.log(document.querySelector('#date-start').value); // 
-      console.log(document.querySelector('#date-end').value);   //
-      
       var start = document.querySelector('#date-start').value.split('-');
       var end   = document.querySelector('#date-end').value.split('-');
       
-      periodStat(start[2], ( Number( start[1] ) - 1 ), start[0], end[2], ( Number( end[1] ) - 1 ), end[0]);
-      
-      console.log(start, end); //
+      periodStat(start[2], 
+                 ( Number( start[1] ) - 1 ), 
+                 start[0], end[2], 
+                 ( Number( end[1] ) - 1 ), 
+                 end[0]);
       
       document.getElementById('modal-menu-2').classList.toggle('visible');
       document.getElementById('modal-background').classList.toggle('visible');
@@ -388,9 +391,11 @@ window.addEventListener('load', (function () {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
             el1 = ((e == 3) || (e == 4) || (e == 5)) ? 
-              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+              toNumber(grid.rows[j-1].cells[e].innerHTML) : 
+              grid.rows[j-1].cells[e].innerHTML;
             el2 = ((e == 3) || (e == 4) || (e == 5)) ? 
-              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+              toNumber(grid.rows[j].cells[e].innerHTML) : 
+              grid.rows[j].cells[e].innerHTML;
       
             if (el1 < el2) {
               var prev = grid.rows[j-1].innerHTML;
@@ -407,9 +412,12 @@ window.addEventListener('load', (function () {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
             el1 = ((e == 3) || (e == 4) || (e == 5)) ? 
-              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+              toNumber(grid.rows[j-1].cells[e].innerHTML) :
+              grid.rows[j-1].cells[e].innerHTML;
+              
             el2 = ((e == 3) || (e == 4) || (e == 5)) ? 
-              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+              toNumber(grid.rows[j].cells[e].innerHTML)   :
+              grid.rows[j].cells[e].innerHTML;
       
             if (el1 > el2) {
               var prev = grid.rows[j-1].innerHTML;
@@ -443,9 +451,12 @@ window.addEventListener('load', (function () {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
             el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? 
-              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+              toNumber(grid.rows[j-1].cells[e].innerHTML) :
+              grid.rows[j-1].cells[e].innerHTML;
+              
             el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? 
-              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+              toNumber(grid.rows[j].cells[e].innerHTML)   :
+              grid.rows[j].cells[e].innerHTML;
       
             if (el1 < el2) {
               var prev = grid.rows[j-1].innerHTML ;
@@ -462,9 +473,12 @@ window.addEventListener('load', (function () {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
             el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? 
-              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+              toNumber(grid.rows[j-1].cells[e].innerHTML) :
+              grid.rows[j-1].cells[e].innerHTML;
+              
             el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? 
-              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+              toNumber(grid.rows[j].cells[e].innerHTML)   :
+              grid.rows[j].cells[e].innerHTML;
         
             if (el1 > el2) {
               var prev = grid.rows[j-1].innerHTML;
@@ -498,9 +512,12 @@ window.addEventListener('load', (function () {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
             el1 = ((e == 3) || (e == 4) || (e == 5)) ? 
-              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+              toNumber(grid.rows[j-1].cells[e].innerHTML) 
+              : grid.rows[j-1].cells[e].innerHTML;
+              
             el2 = ((e == 3) || (e == 4) || (e == 5)) ? 
-              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+              toNumber(grid.rows[j].cells[e].innerHTML)   
+              : grid.rows[j].cells[e].innerHTML;
     
             if (el1 < el2) {
               var prev = grid.rows[j-1].innerHTML;
@@ -517,9 +534,12 @@ window.addEventListener('load', (function () {
         for (var i = 1; i< (grid.rows.length); i++){
           for (var j = grid.rows.length - 1; j > i; j-- ){
             el1 = ((e == 3) || (e == 4) || (e == 5)) ? 
-              toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+              toNumber(grid.rows[j-1].cells[e].innerHTML) 
+              : grid.rows[j-1].cells[e].innerHTML;
+              
             el2 = ((e == 3) || (e == 4) || (e == 5)) ? 
-              toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+              toNumber(grid.rows[j].cells[e].innerHTML)   
+              : grid.rows[j].cells[e].innerHTML;
       
             if (el1 > el2) {
               var prev = grid.rows[j-1].innerHTML;
@@ -556,7 +576,7 @@ window.addEventListener('load', (function () {
     return (document.querySelector(css).innerHTML = text);
   }
 
-  function formatNumber(num) {
+  function formatNum(num) {
     return num.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
   }
   
