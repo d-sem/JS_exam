@@ -70,7 +70,18 @@ window.addEventListener('load', (function () {
     var periodRecommended = 0;
     var periodTypical     = 0;
     var periodArr         = [];
-    var monthNames        = [" января", " февраля", " марта", " апреля", " мая", " июня", " июля", " августа", " сентября", " октября", " ноября", " декабря"];
+    var monthNames        = [" января", 
+                             " февраля", 
+                             " марта", 
+                             " апреля", 
+                             " мая", 
+                             " июня", 
+                             " июля", 
+                             " августа", 
+                             " сентября", 
+                             " октября", 
+                             " ноября", 
+                             " декабря"];
     
     var dateStart = new Date(yearStart, monthStart, dayStart,  0,  0,  0,   0).valueOf() / 1000;
     var dateEnd   = new Date(yearEnd  , monthEnd,   dayEnd,   23, 59, 59, 999).valueOf() / 1000;
