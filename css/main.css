@@ -150,3 +150,15 @@ p {
 input {
   margin-bottom: 10px;
 }
+
+/* Стили описания задания */
+
+button#close-description {
+  display: none;
+}
+
+.btn-desc {
+  position: fixed;
+  top: 10px;
+  left: 40px;
+}
