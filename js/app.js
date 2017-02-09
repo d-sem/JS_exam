@@ -1,7 +1,7 @@
 window.addEventListener('load', (function () {
   var start = new Date();
   var cur = " руб.";
- 
+
   globalStat();
   periodStat();
   mostExpensiveOrders();
@@ -84,6 +84,7 @@ window.addEventListener('load', (function () {
         periodSum         += ordersList[i].total;
         periodRecommended += ordersList[i].recommended;
         periodTypical     += ordersList[i].typical;
+        
         periodOrders++;
         periodArr.push(ordersList[i]);
       } 
@@ -106,16 +107,19 @@ window.addEventListener('load', (function () {
     output("#period-typical",     formatNumber(periodTypical)     + cur );
     
     document.getElementById('stat-day-start').innerHTML     = dayStart;
+    
     if ( monthEnd != monthStart) {
       document.getElementById('stat-month-start').innerHTML = monthNames[monthStart];
     } else {
       document.getElementById('stat-month-start').innerHTML = "";
     }
+    
     if ( yearEnd != yearStart) {
       document.getElementById('stat-year-start').innerHTML  = " " + yearStart + " года";
     } else {
       document.getElementById('stat-year-start').innerHTML  = "";
     }
+    
     document.getElementById('stat-day-end').innerHTML       = dayEnd;
     document.getElementById('stat-month-end').innerHTML     = monthNames[monthEnd];
     document.getElementById('stat-year-end').innerHTML      = yearEnd + " года";
@@ -127,6 +131,7 @@ window.addEventListener('load', (function () {
     if (qOrders == undefined) { 
       var qOrders = 5;
     }
+    
     var tbody    = document.querySelector ('#most-expensive tbody');
     var HTML     = '';
     var template = '<tr>\
@@ -144,7 +149,7 @@ window.addEventListener('load', (function () {
   
     for(var i = 0; i < qOrders; i++) {
       var order = ordersList[i];
-	  var tHTML = template;
+      var tHTML = template;
       
       tHTML = tHTML.replace('#date#',        formatDate( order.timestamp )               );
       tHTML = tHTML.replace('#id#',          order.id                                    );
@@ -152,7 +157,7 @@ window.addEventListener('load', (function () {
       tHTML = tHTML.replace('#total#',       formatNumber(order.total)              + cur);
       tHTML = tHTML.replace('#typical#',     formatNumber(order.typical)            + cur);
       tHTML = tHTML.replace('#recommended#', formatNumber(order.recommended)        + cur);
-	
+  
       HTML += tHTML;
     }
     
@@ -218,17 +223,17 @@ window.addEventListener('load', (function () {
                     </tr>';
   
     for(var i = 0; i < clienteleArr.length; i++) {
-        var client = clienteleArr[i];
-        var tHTML  = template;
+      var client = clienteleArr[i];
+      var tHTML  = template;
     
-        tHTML = tHTML.replace('#user_id#', client.user_id);
-        tHTML = tHTML.replace('#orders#', client.orders);
-        tHTML = tHTML.replace('#total#', formatNumber(client.total) + cur);
-        tHTML = tHTML.replace('#typical#', formatNumber(client.typical) + cur);
-        tHTML = tHTML.replace('#recommended#', formatNumber(client.recommended) + cur);
-	
-        HTML += tHTML;
-      }
+      tHTML = tHTML.replace('#user_id#', client.user_id);
+      tHTML = tHTML.replace('#orders#', client.orders);
+      tHTML = tHTML.replace('#total#', formatNumber(client.total) + cur);
+      tHTML = tHTML.replace('#typical#', formatNumber(client.typical) + cur);
+      tHTML = tHTML.replace('#recommended#', formatNumber(client.recommended) + cur);
+  
+      HTML += tHTML;
+    }
       
     tbody.innerHTML = HTML;
   };
@@ -238,9 +243,9 @@ window.addEventListener('load', (function () {
   document.getElementById('show-orders').addEventListener('click', searchCustomer, false);
   
   function searchCustomer() {
-      var tbody = document.querySelector ('#search tbody');
-      var HTML = '';
-      var template = '<tr>\
+    var tbody = document.querySelector ('#search tbody');
+    var HTML = '';
+    var template = '<tr>\
                       <td>#date#</td>\
                       <td>#id#</td>\
                       <td>#total#</td>\
@@ -248,30 +253,29 @@ window.addEventListener('load', (function () {
                       <td>#recommended#</td>\
                     </tr>';
   
-      var userId = document.querySelector('#input-value').value
+    var userId = document.querySelector('#input-value').value
 
-      if(isNaN(userId) && userId != "") {
-        alert("Ошибка! Введите число!");
-      }
+    if(isNaN(userId) && userId != "") {
+      alert("Ошибка! Введите число!");
+    }
   
-      for(var i = 0, count = ordersList.length; i < count; i++) {
-	    if (ordersList[i].user_id == userId) {
-          var order = ordersList[i];
-	      var tHTML = template;
+    for(var i = 0, count = ordersList.length; i < count; i++) {
+      if (ordersList[i].user_id == userId) {
+        var order = ordersList[i];
+        var tHTML = template;
         
-          tHTML = tHTML.replace('#date#',        formatDate(order.timestamp)           );
-          tHTML = tHTML.replace('#id#',          order.id                              );
-          tHTML = tHTML.replace('#total#',       formatNumber(order.total)        + cur);
-          tHTML = tHTML.replace('#typical#',     formatNumber(order.typical)      + cur);
-          tHTML = tHTML.replace('#recommended#', formatNumber(order.recommended)  + cur);
-	
-	      HTML += tHTML;
-        }
-	  }
-      
-	  tbody.innerHTML = HTML;
-    };
+        tHTML = tHTML.replace('#date#',        formatDate(order.timestamp)           );
+        tHTML = tHTML.replace('#id#',          order.id                              );
+        tHTML = tHTML.replace('#total#',       formatNumber(order.total)        + cur);
+        tHTML = tHTML.replace('#typical#',     formatNumber(order.typical)      + cur);
+        tHTML = tHTML.replace('#recommended#', formatNumber(order.recommended)  + cur);
   
+        HTML += tHTML;
+      }
+    }
+      
+    tbody.innerHTML = HTML;
+  };
   
   // Дополнительная функциональность таблиц
   
@@ -366,40 +370,41 @@ window.addEventListener('load', (function () {
       var q = e.target.cellIndex;
       
       sort(q, sortQ3);
-	}
-	
+    }
+  
     function sort(e){
       if (sortQ3 === 1) {
-		for (var i = 1; i< (grid.rows.length); i++){
-		  for (var j = grid.rows.length - 1; j > i; j-- ){
-			el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-			el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-			
+        for (var i = 1; i< (grid.rows.length); i++){
+          for (var j = grid.rows.length - 1; j > i; j-- ){
+            el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+      
             if (el1 < el2) {
-			  var prev = grid.rows[j-1].innerHTML;
+              var prev = grid.rows[j-1].innerHTML;
               
-			  grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
-			  grid.rows[j].innerHTML = prev;		
-		    }
-		  }
-		}
+              grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
+              grid.rows[j].innerHTML = prev;    
+            }
+          }
+        }
           
         sortQ3 = 2;
         
       } else if (sortQ3 === 2) {
-		for (var i = 1; i< (grid.rows.length); i++){
-	      for (var j = grid.rows.length - 1; j > i; j-- ){
-		    el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-			el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-			
+        for (var i = 1; i< (grid.rows.length); i++){
+          for (var j = grid.rows.length - 1; j > i; j-- ){
+            el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+      
             if (el1 > el2) {
-			  var prev = grid.rows[j-1].innerHTML;
+              var prev = grid.rows[j-1].innerHTML;
               
-			  grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
-			  grid.rows[j].innerHTML = prev;		
-			}
-		  }
-		}
+              grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
+              grid.rows[j].innerHTML = prev;    
+            }
+          }
+        }
+        
         sortQ3 = 1;
       }
     } 
@@ -411,44 +416,45 @@ window.addEventListener('load', (function () {
   
   document.getElementById('clientele').addEventListener ('click', (function (e) {
     var grid = document.getElementById('clientele');
-	
+  
     if (e.target.nodeName == 'TH') {
       var q = e.target.cellIndex;
       
       sort(q, sortQ4);
-	}
-	
-	function sort(e){
+    }
+  
+    function sort(e){
       if (sortQ4 === 1) {
-		for (var i = 1; i< (grid.rows.length); i++){
-	      for (var j = grid.rows.length - 1; j > i; j-- ){
-			el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-			el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-			
+        for (var i = 1; i< (grid.rows.length); i++){
+          for (var j = grid.rows.length - 1; j > i; j-- ){
+            el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+      
             if (el1 < el2) {
-			  var prev = grid.rows[j-1].innerHTML ;
-			  
+              var prev = grid.rows[j-1].innerHTML ;
+        
               grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
-					grid.rows[j].innerHTML = prev;		
-			}
-		  }
-		}
+              grid.rows[j].innerHTML = prev;    
+            }
+          }
+        }
           
         sortQ4 = 2;
+        
       } else if (sortQ4 === 2) {
-		for (var i = 1; i< (grid.rows.length); i++){
-	      for (var j = grid.rows.length - 1; j > i; j-- ){
-			el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-			el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-				
+        for (var i = 1; i< (grid.rows.length); i++){
+          for (var j = grid.rows.length - 1; j > i; j-- ){
+            el1 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 1) || (e == 2) || (e == 3) || (e == 4)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+        
             if (el1 > el2) {
-			  var prev = grid.rows[j-1].innerHTML ;
-				  
+              var prev = grid.rows[j-1].innerHTML;
+          
               grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
-			  grid.rows[j].innerHTML = prev;		
-		    }
-		  }
-		}
+              grid.rows[j].innerHTML = prev;    
+            }
+          }
+        }
           
         sortQ4 = 1;
       }
@@ -460,80 +466,82 @@ window.addEventListener('load', (function () {
   var sortQ5 = 1;
   
   document.getElementById('search').addEventListener ('click', (function (e) {
-     
-  var grid = document.getElementById('search');
+    var grid = document.getElementById('search');
   
-  if (e.target.nodeName == 'TH') {
-    var q = e.target.cellIndex;
+    if (e.target.nodeName == 'TH') {
+      var q = e.target.cellIndex;
     
-    sort(q, sortQ3);
-  }
-	
-  function sort(e){
-    if (sortQ5 === 1) {
-      for (var i = 1; i< (grid.rows.length); i++){
-		for (var j = grid.rows.length - 1; j > i; j-- ){
-		  el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-		  el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-		
-          if (el1 < el2) {
-		    var prev = grid.rows[j-1].innerHTML;
-            
-			grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
-			grid.rows[j].innerHTML = prev;		
-		  }
-		}
-	  }
-          
-      sortQ5 = 2;
-    } else if (sortQ5 === 2) {
-	  for (var i = 1; i< (grid.rows.length); i++){
-		for (var j = grid.rows.length - 1; j > i; j-- ){
-		  el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
-		  el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
-		  
-          if (el1 > el2) {
-			var prev = grid.rows[j-1].innerHTML ;
-			
-            grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
-			grid.rows[j].innerHTML = prev;		
-		  }
-		}
-	  }
-          
-      sortQ5 = 1;
+      sort(q, sortQ3);
     }
-  } 
-}), false);
   
-// Вспомогательные функции
-
-function formatDate(timestamp) {
-  var date = new Date(timestamp * 1000);
-  var dd = date.getDate();
+    function sort(e){
+      if (sortQ5 === 1) {
+        for (var i = 1; i< (grid.rows.length); i++){
+          for (var j = grid.rows.length - 1; j > i; j-- ){
+            el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
     
-  if (dd < 10) dd = '0' + dd;
-
-  var mm = date.getMonth();
-  if (mm < 10) mm = '0' + mm;
-
-  var yy = date.getFullYear();
-
-  return dd + '.' + mm + '.' + yy;
-}
-
-function output(css, text) {
-  return (document.querySelector(css).innerHTML = text);
-}
-
-function formatNumber(num) {
-  return num.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
-}
+            if (el1 < el2) {
+              var prev = grid.rows[j-1].innerHTML;
+            
+              grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
+              grid.rows[j].innerHTML = prev;    
+            }
+          }
+        }
+          
+        sortQ5 = 2;
+        
+      } else if (sortQ5 === 2) {
+        for (var i = 1; i< (grid.rows.length); i++){
+          for (var j = grid.rows.length - 1; j > i; j-- ){
+            el1 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j-1].cells[e].innerHTML) : grid.rows[j-1].cells[e].innerHTML;
+            el2 = ((e == 3) || (e == 4) || (e == 5)) ? toNumber(grid.rows[j].cells[e].innerHTML)   : grid.rows[j].cells[e].innerHTML;
+      
+            if (el1 > el2) {
+              var prev = grid.rows[j-1].innerHTML;
+      
+              grid.rows[j-1].innerHTML = grid.rows[j].innerHTML;
+              grid.rows[j].innerHTML = prev;    
+            }
+          }
+        }
+          
+        sortQ5 = 1;
+      }
+    } 
+  }), false);
   
-function toNumber(thisString) {
-  return Number(thisString.replace(/\s+/g, '').replace('руб.', ''));
-}
+  // Вспомогательные функции
+
+  function formatDate(timestamp) {
+    var date = new Date(timestamp * 1000);
+    var dd = date.getDate();
+    
+    if (dd < 10) dd = '0' + dd;
+
+    var mm = date.getMonth();
+    
+    if (mm < 10) mm = '0' + mm;
+
+    var yy = date.getFullYear();
+
+    return dd + '.' + mm + '.' + yy;
+  }
+
+  function output(css, text) {
+    return (document.querySelector(css).innerHTML = text);
+  }
+
+  function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+  }
+  
+  function toNumber(thisString) {
+    return Number(thisString.replace(/\s+/g, '').replace('руб.', ''));
+  }
   
   var end = new Date();
+  
   console.log('Скорость ' + (end.getTime() - start.getTime()) + ' мс');
 }), false);
